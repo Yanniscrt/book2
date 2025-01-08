@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Définir une couleur pour les éléments du header */
+.header-text {
+    color: white; /* Texte en blanc pour les éléments spécifiques */
+}
+
+/* Garder le texte du sous-menu avec la couleur par défaut */
+.submenu a {
+    color: #333; /* Par défaut, couleur sombre pour les sous-menus */
+}
+
+/* Fond noir pour le header */
+header {
+    background-color: #323232;
+}
+
+/* Taille fixe pour les images */
+.image-size {
+    width: 500px;  /* Largeur fixée à 500px */
+    height: 200px; /* Hauteur fixée à 200px */
+    object-fit: cover; /* Maintient l'aspect ratio et couvre l'espace */
+    border-radius: 12px; /* Coins arrondis */
+}
+
+/* Pour masquer le menu burger lorsque non actif */
+.mobile-menu {
+    display: none;
+}
+    .mobile-menu .menu-item button {
+        width: 100%; /* Prendre toute la largeur */
+        text-align: center; /* Centrer le texte */
+        justify-content: center; /* Centrer le texte avec Flexbox */
+        color: #333; /* Appliquer la couleur noire */
+    }
+
+/* Affiche le menu mobile lorsque l'état est 'active' */
+.mobile-menu-active {
+    display: block;
+}
+
+/* Style pour le menu mobile */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Menu caché à droite */
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 50;
+    padding-top: 2rem;
+    transition: right 0.3s ease; /* Animation de défilement */
+    overflow-y: auto;
+}
+
+/* Animation pour faire apparaître le menu */
+.mobile-menu-active {
+    right: 0;
+}
+
+/* Style du titre dans le menu mobile */
+.mobile-menu h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Style des éléments du menu dans le mobile */
+.mobile-menu a {
+    display: block;
+    padding: 1rem 0; /* Ajuste uniformément le padding */
+    text-align: center;
+    font-size: 1.25rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.mobile-menu a:last-child {
+    padding-bottom: 1rem; /* Pour harmoniser avec le reste */
+}
+
+.mobile-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Style pour le lien "CONTACT" en bas du menu */
+.mobile-menu .contact-link {
+    font-weight: bold;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.25rem;
+    color: #333;
+    text-decoration: none;
+    border-top: 1px solid #ccc;
+}
+
+/* Style pour le bouton de fermeture (croix) */
+.close-menu {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Style du sous-menu pour la version mobile */
+.submenu {
+    display: block;
+    max-height: 0; /* Initialement masqué */
+    overflow: hidden;
+    padding: 0;
+    margin-top: 1rem;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Transition de l'ouverture */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    min-width: 200px;
+}
+
+/* Afficher le sous-menu lorsque le menu est actif */
+.menu-item.open .submenu {
+    max-height: 500px; /* Taille maximale lors de l'ouverture */
+    padding: 1rem 0; /* Espace à l'intérieur du sous-menu */
+}
+
+/* Ajouter un effet de hover pour les éléments du sous-menu */
+.submenu a {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.submenu a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Espace sous les images */
+.image-space {
+    margin-bottom: 2rem;
+}
+
+/* Style pour la transition d'images */
+.image-container {
+    position: relative;
+    display: inline-block;
+    /* Ajouter un positionnement relatif */
+    width: 500px;
+    height: 200px;
+}
+
+/* Image de base */
+.image-container img {
+    width: 500px;
+    height: 200px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;  /* L'image initiale est en dessous */
+    transition: opacity 0.3s ease-in-out; /* Ajout d'une transition pour la fluidité */
+    border-radius: 12px; /* Coins arrondis */
+}
+
+/* Image au survol */
+.image-container img.hover-img {
+    opacity: 0;  /* Initialement invisible */
+    z-index: 2; /* Image au survol est au-dessus */
+}
+
+/* Montrer l'image au survol */
+.image-container:hover img.hover-img {
+    opacity: 1; /* L'image de survol devient visible */
+}
+
+footer {
+    background-color: #323232; /* Remplace par la couleur que tu veux */
+}
+
+.footer-logo img {
+    height: 3rem; /* Taille des logos */
+    transition: transform 0.3s ease-in-out;
+}
+
+.footer-logo img:hover {
+    transform: scale(1.1); /* Effet de zoom au survol */
+}
+
+/* Cacher le sous-menu par défaut en version desktop */
+.submenu {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+/* Afficher le sous-menu au survol de .menu-item */
+.menu-item:hover .submenu {
+    visibility: visible;
+    opacity: 1;
+    max-height: 500px; /* Affichage complet */
+    padding: 1rem 0; /* Ajout d'un padding pour l'espacement interne */
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+            <div class="flex lg:flex-1">
+                <a href="https://www.votre-lien.com" class="-m-1.5 p-1.5">
+                    <span class="sr-only">Votre Entreprise</span>
+                    <img class="h-8 w-auto" src="/Users/yanniscuret/Desktop/BOOK_2/00_img/logo_YNS2.png" alt="Votre Image">
+                </a>
+            </div>
+            <div class="flex lg:hidden">
+                <button id="burger-menu" type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                    <span class="sr-only">Ouvrir le menu</span>
+                    <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+            <div class="hidden lg:flex lg:gap-x-12">
+                <div class="relative menu-item" id="menu-item">
+                    <button type="button" class="flex items-center gap-x-1 header-text text-sm/6 font-semibold">
+                        CRÉATIONS
+                        <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+    
+                    <!-- Sous-menu CRÉATIONS avec animation -->
+                    <div class="submenu absolute top-full -left-8 z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white ring-1 shadow-lg ring-gray-900/5">
+                        <div class="p-4">
+                            <a href="glyph.html" class="block p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">GLYPH</a>
+                            <a href="feets.html" class="block p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">FEET'S</a>
+                            <a href="phonotopia.html" class="block p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">PHONOTOPIA</a>
+                            <a href="creadivers.html" class="block p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">CRÉA DIVERS</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <a href="https://www.oddside.fr" class="header-text text-sm/6 font-semibold">ODDSIDE</a>
+                <a href="https://www.nvc.com" class="header-text text-sm/6 font-semibold">NVC</a>
+                <a href="https://www.sael.com" class="header-text text-sm/6 font-semibold">SAEL</a>
+            </div>
+            <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                <a href="#" class="header-text text-sm/6 font-semibold">Log in <span aria-hidden="true">&rarr;</span></a>
+            </div>
+        </nav>
+    </header>
+    <!-- Bannière pleine largeur -->
+    <div class="w-full bg-cover bg-center h-48" style="background-image: url('https://via.placeholder.com/1920x400');">
+        <div class="flex items-center justify-center h-full bg-black bg-opacity-50">
+            <h2 class="text-white text-3xl font-semibold">Votre Bannière</h2>
+        </div>
+    </div>
+
+    <!-- Section avec les images centrées -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
+            <!-- Image 1 -->
+            <div class="image-container image-space">
+                <a href="oddside.html" class="image-container image-space">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/oddside1.gif" alt="Image 2" class="image-size">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/oddside2.gif" alt="Image 2 Hover" class="hover-img">
+                </a>
+            </div>            
+            <!-- Image 2 -->
+            <div class="image-container image-space">
+                <a href="glyph.html" class="image-container image-space">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/glyph1.png" alt="Image 2" class="image-size">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/glyph2.png" alt="Image 2 Hover" class="hover-img">
+                </a>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
+            <!-- Image 1 -->
+            <div class="image-container image-space">
+                <a href="feets.html" class="image-container image-space">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/feets1.png" alt="Image 2" class="image-size">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/feets2.png" alt="Image 2 Hover" class="hover-img">
+                </a>
+            </div>            
+            <!-- Image 2 -->
+            <div class="image-container image-space">
+                <a href="https://www.figma.com/proto/Lf46v0bGXouaDGFTWlUVia/Proto-final?node-id=1-2&node-type=frame&t=QTU0c9ImiyqHnKHG-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2" class="image-container image-space">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/NVC1.png" alt="Image 2" class="image-size">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/NVC2.png" alt="Image 2 Hover" class="hover-img">
+                </a>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 justify-items-center">
+            <!-- Image 1 -->
+            <div class="image-container image-space">
+                <a href="phonotopia.html" class="image-container image-space">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/phonotopia1.png" alt="Image 2" class="image-size">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/phonotopia2.png" alt="Image 2 Hover" class="hover-img">
+                </a>
+            </div>            
+            <!-- Image 2 -->
+            <div class="image-container image-space">
+                <a href="https://www.figma.com/proto/alBzNAfpkVpcOYqLPxl9q1/PHONE_A?page-id=0%3A1&node-id=3-94&starting-point-node-id=3%3A94&t=PCvjW6YzAlNR4WJV-1" class="image-container image-space">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/sael1.png" alt="Image 2" class="image-size">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/sael2.png" alt="Image 2 Hover" class="hover-img">
+                </a>
+            </div>
+        </div>
+    </div>
+    <footer class="footer py-8">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center space-x-8">
+                <!-- Logo 1 -->
+                <div class="footer-logo">
+                    <a href="https://www.instagram.com/yn.s._?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/r1.svg" alt="Logo 1" class="h-12">
+                </div>
+                <!-- Logo 2 -->
+                <div class="footer-logo">
+                    <a href="https://www.linkedin.com/in/yannis-curet-09230726a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/r2.svg" alt="Logo 2" class="h-12">
+                </div>
+                <!-- Logo 3 -->
+                <div class="footer-logo">
+                    <a href="https://www.votre-lien.com">
+                        <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/r3.svg" alt="Logo 3" class="h-12">
+                    </a>
+                </div>                
+            </div>
+        </div>
+    </footer>
+<!-- Menu Burger -->
+<div class="mobile-menu" id="mobile-menu">
+    <button class="close-menu" id="close-menu">&#x2715;</button>
+    <h2>Menu</h2>
+
+    <!-- Menu Burger similaire à Desktop -->
+    <div class="relative menu-item">
+        <button type="button" class="flex items-center gap-x-1 header-text text-sm/6 font-semibold" id="creations-toggle">
+            CRÉATIONS
+            <svg class="size-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+        </button>
+
+        <!-- Sous-menu CRÉATIONS dans le mobile -->
+        <div class="submenu mt-3 w-full overflow-hidden rounded-3xl bg-white ring-1 shadow-lg ring-gray-900/5">
+            <div class="p-4">
+                <a href="#" class="block p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">GLYPH</a>
+                <a href="#" class="block p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">FEET'S</a>
+                <a href="#" class="block p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">PHONOTOPIA</a>
+                <a href="#" class="block p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">CRÉA DIVERS</a>
+            </div>
+        </div>
+    </div>
+
+    <a href="oddside.html" class="header-text text-sm/6 font-semibold">ODDSIDE</a>
+    <a href="https://www.figma.com/proto/alBzNAfpkVpcOYqLPxl9q1/PHONE_A?page-id=0%3A1&node-id=3-94&starting-point-node-id=3%3A94&t=PCvjW6YzAlNR4WJV-1" class="header-text text-sm/6 font-semibold">SAEL</a>
+    <a href="https://www.figma.com/proto/Lf46v0bGXouaDGFTWlUVia/Proto-final?node-id=1-2&node-type=frame&t=QTU0c9ImiyqHnKHG-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2" class="header-text text-sm/6 font-semibold">NVC</a>
+    
+    <!-- Lien Contact placé en bas -->
+    <a href="contact.html" class="header-text text-sm/6 font-semibold contact-link">Contact</a>
+</div>
+
+<script>
+    // Cibler le bouton de menu et la section de sous-menu
+    const burgerMenu = document.getElementById('burger-menu');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const creationsButton = document.querySelector('.menu-item button');
+    const submenuMobile = document.querySelector('.submenu');
+
+    // Fonction pour ouvrir ou fermer le menu mobile
+    burgerMenu.addEventListener('click', () => {
+        mobileMenu.classList.toggle('mobile-menu-active');
+    });
+
+    // Fonction pour ouvrir/fermer le sous-menu de créations sur mobile
+    creationsButton.addEventListener('click', () => {
+        submenuMobile.classList.toggle('open'); // Toggle d'ouverture du sous-menu
+    });
+
+    // Cibler le bouton de fermeture du menu mobile
+    const closeMenu = document.querySelector('.close-menu');
+    closeMenu.addEventListener('click', () => {
+        mobileMenu.classList.remove('mobile-menu-active');
+    });
+</script>
+</body>
+</html>
