@@ -7,211 +7,226 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Définir une couleur pour les éléments du header */
-.header-text {
-    color: white; /* Texte en blanc pour les éléments spécifiques */
-}
-
-/* Garder le texte du sous-menu avec la couleur par défaut */
-.submenu a {
-    color: #333; /* Par défaut, couleur sombre pour les sous-menus */
-}
-
-/* Fond noir pour le header */
-header {
-    background-color: #323232;
-}
-
-/* Taille fixe pour les images */
-.image-size {
-    width: 500px;  /* Largeur fixée à 500px */
-    height: 200px; /* Hauteur fixée à 200px */
-    object-fit: cover; /* Maintient l'aspect ratio et couvre l'espace */
-    border-radius: 12px; /* Coins arrondis */
-}
-
-/* Pour masquer le menu burger lorsque non actif */
-.mobile-menu {
-    display: none;
-}
-    .mobile-menu .menu-item button {
-        width: 100%; /* Prendre toute la largeur */
-        text-align: center; /* Centrer le texte */
-        justify-content: center; /* Centrer le texte avec Flexbox */
-        color: #333; /* Appliquer la couleur noire */
-    }
-
-/* Affiche le menu mobile lorsque l'état est 'active' */
-.mobile-menu-active {
-    display: block;
-}
-
-/* Style pour le menu mobile */
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Menu caché à droite */
-    left: 0;
-    bottom: 0;
-    background-color: white;
-    z-index: 50;
-    padding-top: 2rem;
-    transition: right 0.3s ease; /* Animation de défilement */
-    overflow-y: auto;
-}
-
-/* Animation pour faire apparaître le menu */
-.mobile-menu-active {
-    right: 0;
-}
-
-/* Style du titre dans le menu mobile */
-.mobile-menu h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-/* Style des éléments du menu dans le mobile */
-.mobile-menu a {
-    display: block;
-    padding: 1rem 0; /* Ajuste uniformément le padding */
-    text-align: center;
-    font-size: 1.25rem;
-    color: #333;
-    text-decoration: none;
-}
-
-.mobile-menu a:last-child {
-    padding-bottom: 1rem; /* Pour harmoniser avec le reste */
-}
-
-.mobile-menu a:hover {
-    background-color: #f0f0f0;
-}
-
-/* Style pour le lien "CONTACT" en bas du menu */
-.mobile-menu .contact-link {
-    font-weight: bold;
-    padding: 1rem;
-    text-align: center;
-    font-size: 1.25rem;
-    color: #333;
-    text-decoration: none;
-    border-top: 1px solid #ccc;
-}
-
-/* Style pour le bouton de fermeture (croix) */
-.close-menu {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 2rem;
-    color: #333;
-    cursor: pointer;
-}
-
-/* Style du sous-menu pour la version mobile */
-.submenu {
-    display: block;
-    max-height: 0; /* Initialement masqué */
-    overflow: hidden;
-    padding: 0;
-    margin-top: 1rem;
-    transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Transition de l'ouverture */
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    min-width: 200px;
-}
-
-/* Afficher le sous-menu lorsque le menu est actif */
-.menu-item.open .submenu {
-    max-height: 500px; /* Taille maximale lors de l'ouverture */
-    padding: 1rem 0; /* Espace à l'intérieur du sous-menu */
-}
-
-/* Ajouter un effet de hover pour les éléments du sous-menu */
-.submenu a {
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    color: #333;
-    text-decoration: none;
-}
-
-.submenu a:hover {
-    background-color: #f0f0f0;
-}
-
-/* Espace sous les images */
-.image-space {
-    margin-bottom: 2rem;
-}
-
-/* Style pour la transition d'images */
-.image-container {
-    position: relative;
-    display: inline-block;
-    /* Ajouter un positionnement relatif */
-    width: 500px;
-    height: 200px;
-}
-
-/* Image de base */
-.image-container img {
-    width: 500px;
-    height: 200px;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;  /* L'image initiale est en dessous */
-    transition: opacity 0.3s ease-in-out; /* Ajout d'une transition pour la fluidité */
-    border-radius: 12px; /* Coins arrondis */
-}
-
-/* Image au survol */
-.image-container img.hover-img {
-    opacity: 0;  /* Initialement invisible */
-    z-index: 2; /* Image au survol est au-dessus */
-}
-
-/* Montrer l'image au survol */
-.image-container:hover img.hover-img {
-    opacity: 1; /* L'image de survol devient visible */
-}
-
-footer {
-    background-color: #323232; /* Remplace par la couleur que tu veux */
-}
-
-.footer-logo img {
-    height: 3rem; /* Taille des logos */
-    transition: transform 0.3s ease-in-out;
-}
-
-.footer-logo img:hover {
-    transform: scale(1.1); /* Effet de zoom au survol */
-}
-
-/* Cacher le sous-menu par défaut en version desktop */
-.submenu {
-    visibility: hidden;
-    opacity: 0;
-    max-height: 0;
-    transition: opacity 0.3s ease, max-height 0.3s ease;
-}
-
-/* Afficher le sous-menu au survol de .menu-item */
-.menu-item:hover .submenu {
-    visibility: visible;
-    opacity: 1;
-    max-height: 500px; /* Affichage complet */
-    padding: 1rem 0; /* Ajout d'un padding pour l'espacement interne */
-}
-
-    </style>
+        .header-text {
+            color: white; /* Texte en blanc pour les éléments spécifiques */
+        }
+        
+        /* Garder le texte du sous-menu avec la couleur par défaut */
+        .submenu a {
+            color: #333; /* Par défaut, couleur sombre pour les sous-menus */
+        }
+        
+        /* Fond noir pour le header */
+        header {
+            background-color: #323232;
+        }
+        
+        /* Taille fixe pour les images */
+        .image-size {
+            width: 500px;  /* Largeur fixée à 500px */
+            height: 200px; /* Hauteur fixée à 200px */
+            object-fit: cover; /* Maintient l'aspect ratio et couvre l'espace */
+            border-radius: 12px; /* Coins arrondis */
+        }
+        
+        /* Pour masquer le menu burger lorsque non actif */
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu .menu-item button {
+            width: 100%; /* Prendre toute la largeur */
+            text-align: center; /* Centrer le texte */
+            justify-content: center; /* Centrer le texte avec Flexbox */
+            color: #333; /* Appliquer la couleur noire */
+        }
+        
+        /* Affiche le menu mobile lorsque l'état est 'active' */
+        .mobile-menu-active {
+            display: block;
+        }
+        
+        /* Style pour le menu mobile */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%; /* Menu caché à droite */
+            left: 0;
+            bottom: 0;
+            background-color: white;
+            z-index: 50;
+            padding-top: 2rem;
+            transition: right 0.3s ease; /* Animation de défilement */
+            overflow-y: auto;
+        }
+        
+        /* Animation pour faire apparaître le menu */
+        .mobile-menu-active {
+            right: 0;
+        }
+        
+        /* Style du titre dans le menu mobile */
+        .mobile-menu h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        /* Style des éléments du menu dans le mobile */
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 0; /* Ajuste uniformément le padding */
+            text-align: center;
+            font-size: 1.25rem;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .mobile-menu a:last-child {
+            padding-bottom: 1rem; /* Pour harmoniser avec le reste */
+        }
+        
+        .mobile-menu a:hover {
+            background-color: #f0f0f0;
+        }
+        
+        /* Style pour le lien "CONTACT" en bas du menu */
+        .mobile-menu .contact-link {
+            font-weight: bold;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.25rem;
+            color: #333;
+            text-decoration: none;
+            border-top: 1px solid #ccc;
+        }
+        
+        /* Style pour le bouton de fermeture (croix) */
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        /* Style du sous-menu pour la version mobile */
+        .submenu {
+            display: block;
+            max-height: 0; /* Initialement masqué */
+            overflow: hidden;
+            padding: 0;
+            margin-top: 1rem;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Transition de l'ouverture */
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            min-width: 200px;
+        }
+        
+        /* Afficher le sous-menu lorsque le menu est actif */
+        .menu-item.open .submenu {
+            max-height: 500px; /* Taille maximale lors de l'ouverture */
+            padding: 1rem 0; /* Espace à l'intérieur du sous-menu */
+        }
+        
+        /* Ajouter un effet de hover pour les éléments du sous-menu */
+        .submenu a {
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .submenu a:hover {
+            background-color: #f0f0f0;
+        }
+        
+        /* Espace sous les images */
+        .image-space {
+            margin-bottom: 2rem;
+        }
+        
+        /* Style pour la transition d'images */
+        .image-container {
+            position: relative;
+            display: inline-block;
+            /* Ajouter un positionnement relatif */
+            width: 500px;
+            height: 200px;
+        }
+        
+        /* Image de base */
+        .image-container img {
+            width: 500px;
+            height: 200px;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;  /* L'image initiale est en dessous */
+            transition: opacity 0.3s ease-in-out; /* Ajout d'une transition pour la fluidité */
+            border-radius: 12px; /* Coins arrondis */
+        }
+        
+        /* Image au survol */
+        .image-container img.hover-img {
+            opacity: 0;  /* Initialement invisible */
+            z-index: 2; /* Image au survol est au-dessus */
+        }
+        
+        /* Montrer l'image au survol */
+        .image-container:hover img.hover-img {
+            opacity: 1; /* L'image de survol devient visible */
+        }
+        
+        /* Ajustements spécifiques à la version mobile */
+        @media (max-width: 768px) {
+            .image-container.image-space {
+                max-width: 90%; /* Ne pas dépasser 90% de la largeur de l'écran */
+                margin: 0 auto; /* Centrer les images */
+                padding: 0 5%; /* Ajouter un espace entre le bord de l'écran et l'image */
+                box-sizing: border-box; /* Inclure le padding dans la largeur */
+            }
+        
+            .image-container img {
+                width: 100%; /* Les images prennent toute la largeur du conteneur */
+                height: auto; /* Garder le ratio d'aspect */
+            }
+        }
+        
+        footer {
+            background-color: #323232; /* Remplace par la couleur que tu veux */
+        }
+        
+        .footer-logo img {
+            height: 3rem; /* Taille des logos */
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .footer-logo img:hover {
+            transform: scale(1.1); /* Effet de zoom au survol */
+        }
+        
+        /* Cacher le sous-menu par défaut en version desktop */
+        .submenu {
+            visibility: hidden;
+            opacity: 0;
+            max-height: 0;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
+        }
+        
+        /* Afficher le sous-menu au survol de .menu-item */
+        .menu-item:hover .submenu {
+            visibility: visible;
+            opacity: 1;
+            max-height: 500px; /* Affichage complet */
+            padding: 1rem 0; /* Ajout d'un padding pour l'espacement interne */
+        }
+        </style>
+        
 </head>
 <body>
     <header>
@@ -323,17 +338,17 @@ footer {
                 <!-- Logo 1 -->
                 <div class="footer-logo">
                     <a href="https://www.instagram.com/yn.s._?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
-                    <img src="00_img/r1.svg" alt="Logo 1" class="h-12">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/r1.svg" alt="Logo 1" class="h-12">
                 </div>
                 <!-- Logo 2 -->
                 <div class="footer-logo">
                     <a href="https://www.linkedin.com/in/yannis-curet-09230726a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">
-                    <img src="00_img/r2.svg" alt="Logo 2" class="h-12">
+                    <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/r2.svg" alt="Logo 2" class="h-12">
                 </div>
                 <!-- Logo 3 -->
                 <div class="footer-logo">
                     <a href="https://www.votre-lien.com">
-                        <img src="00_img/r3.svg" alt="Logo 3" class="h-12">
+                        <img src="/Users/yanniscuret/Desktop/BOOK_2/00_img/r3.svg" alt="Logo 3" class="h-12">
                     </a>
                 </div>                
             </div>
